@@ -19,9 +19,10 @@ import java.util.Iterator;
  */
 public class RddTest03 {
     public static void main(String[] args) {
-        SparkConf conf =new SparkConf().setMaster("local").setAppName("RddTest03");
+        SparkConf conf =new SparkConf().setMaster("local[*]").setAppName("RddTest03");
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> rdd =sc.parallelize(Arrays.asList("welcome","welcome hell world","welcome python world","welcome java world"));
+        System.out.println(rdd.getNumPartitions());
         JavaRDD<String> words = rdd.flatMap(new FlatMapFunction<String, String>() {
             @Override
             public Iterator<String> call(String s) throws Exception {
@@ -59,13 +60,6 @@ public class RddTest03 {
         //输出字符统计
         System.out.println("console all");
         wordredues.foreach(stringIntegerTuple2 -> System.out.println(stringIntegerTuple2));
-        wordredues.sortByKey(new Comparator<String>() {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
-        });
-        wordredues.foreach(stringIntegerTuple2 -> System.out.println(stringIntegerTuple2));
 
         //测试自定义排序,暂未实现
         //System.out.println("test define sort:");
@@ -77,16 +71,11 @@ public class RddTest03 {
         });*/
 
 
-        wordredues.foreach(stringIntegerTuple2 -> System.out.println(stringIntegerTuple2));
+        //wordredues.foreach(stringIntegerTuple2 -> System.out.println(stringIntegerTuple2));
 
         //测试默认排序,默认是ascending(上升)true，如果sortByKey参数是false则是降序
         System.out.println("test sort:");
         wordredues.sortByKey(true).foreach(stringIntegerTuple2 -> System.out.println(stringIntegerTuple2));
 
-    }
-}
-class IntegerComparator implements Comparator<Integer> {
-    public int compare(Integer a, Integer b) {
-        return String.valueOf(a).compareTo(String.valueOf(b));
     }
 }

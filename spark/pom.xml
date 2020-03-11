@@ -29,6 +29,11 @@
             <version>${spark.version}</version>
             <scope>provided</scope>
         </dependency>-->
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>5.0</version>
+        </dependency>
 
 <!--        解决IllegalAccessError-->
         <dependency>
