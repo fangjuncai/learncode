@@ -4,15 +4,64 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 /**
  * 测试用lambda表达式来调用实现了@FunctionalInterface
  * 1. 只有一个抽象方法的接口，无论有没有加上@FunctionalInterface
  * 2. 继承了Object方法的方法，不算入接口方法计入
  */
-public class Lambda01FunctionInterface {
+public class LambdaFunctionTest {
     public static void main(String[] args) {
+        lambdaList();
 
+    }
+    public static void lambdaIteratorArray(){
+        int[] intArray = new int[]{10,9,1,2};
+        Arrays.stream(intArray).forEach(item -> System.out.println(item));
+    }
+    public static void lambdaList(){
+        List<Integer> integers = Arrays.asList(1,0,10,6);
+        //实现了Consume的接口accpt,对象调用了实现了Consumer的accept方法)
+        integers.forEach(item -> System.out.println(item));
+        /**
+         *        测试Function的转换
+         *        Returns a stream consisting of the results of applying the given
+         *         function to the elements of this stream
+         */
+        integers.stream().map(new Function<Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer) {
+                return integer * 2;
+            }
+/*
+            //这是default方法 可以不重写
+            @Override
+            public <V> Function<V, Integer> compose(Function<? super V, ? extends Integer> before) {
+                return null;
+            }
+
+            @Override
+            public <V> Function<Integer, V> andThen(Function<? super Integer, ? extends V> after) {
+                return null;
+            }*/
+        }).forEach(item -> System.out.println(item));
+
+        integers.stream().map(item -> item* 3).forEach(item -> System.out.println(item));
+        //不会修改原来的数据源，它会将操作后的数据保存到另外一个对象中
+        integers.forEach(item -> System.out.println(item));
+
+    }
+
+    /**
+     * 测试 一个新方法、一个Obect的toString方法的接口
+     * @param functionalInterface01
+     */
+    public static void testFunctional01(FunctionalInterface01 functionalInterface01){
+        functionalInterface01.test01();
+
+    }
+    public static void testFunction01(){
         System.out.println("---------------------------");
         //Runable只有一个接口
         new Thread(new Runnable() {
@@ -64,10 +113,6 @@ public class Lambda01FunctionInterface {
                 System.out.println(integer*2);
             }
         });
-
-    }
-    public static void testFunctional01(FunctionalInterface01 functionalInterface01){
-        functionalInterface01.test01();
 
     }
 }

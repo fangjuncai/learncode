@@ -1,17 +1,37 @@
 package com.learn.java.javabase.tmp;
+import org.apache.commons.lang3.StringUtils;
 
+import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 public class Test01 {
     public static void main(String[] args)
     {
-
-        testCompare();
+        testArray01();
     }
+
+    public static void testArray01(){
+        Integer[] int1 = null;
+        if(int1 !=null){
+            System.out.println("len "+int1.length);
+        }
+
+
+        List<Integer> integers = Arrays.asList(10,6,0,1,2,3);
+        integers.sort((o1, o2) -> o1-o2);
+        int1 = (Integer[]) integers.toArray();
+        System.out.println("len "+int1.length);
+        for(int i = 0;i<int1.length;i++){
+            System.out.println(int1[i]);
+        }
+    }
+
+
     private static void testSubstring(){
         String s ="012345";
         System.out.println(s.substring(1,4));

@@ -11,6 +11,10 @@ public class IoTest02 {
     public static void main(String[] args) {
         testFileOutStream();
     }
+
+    /**
+     * 测试字符流的写
+     */
     public static void testFileWriter(){
         String filePath = "D:\\tmp\\java\\iotest01.txt";
         File file = new File(filePath);
@@ -24,6 +28,10 @@ public class IoTest02 {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 测试字节流的写
+     */
     public static void testFileOutStream(){
         String filePath = "D:\\tmp\\java\\iotest02.txt";
         File file = new File(filePath);

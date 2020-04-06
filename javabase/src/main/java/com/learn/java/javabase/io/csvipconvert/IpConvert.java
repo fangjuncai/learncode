@@ -61,7 +61,7 @@ public final class IpConvert {
     /**
      * ipv6地址转有符号byte[17]
      */
-    private static byte[] ipv6ToBytes(String ipv6) {
+    public static byte[] ipv6ToBytes(String ipv6) {
         byte[] ret = new byte[17];
         ret[0] = 0;
         int ib = 16;
@@ -97,7 +97,7 @@ public final class IpConvert {
     /**
      * ipv4地址转有符号byte[5]
      */
-    private static byte[] ipv4ToBytes(String ipv4) {
+    public static byte[] ipv4ToBytes(String ipv4) {
         byte[] ret = new byte[5];
         ret[0] = 0;
         // 先找到IP地址字符串中.的位置

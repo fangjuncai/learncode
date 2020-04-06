@@ -41,7 +41,7 @@ public class Ipv4ConvertOpePro {
             dataList.add(ipinfo);
         }
         //输出转换后的operator_prov_opt_info
-        exportFile(new File("C:\\Users\\juncai\\Desktop\\init_operator_prov_opt_info.txt"), dataList);
+        exportFile(new File("D:\\tmp\\shanghaimobile\\20200403-2\\init_operator_prov_opt_info.txt"), dataList);
     }
 
     //将ip信息排序
@@ -79,8 +79,8 @@ public class Ipv4ConvertOpePro {
             else{
                 ipProOpeInfo.setStartIp(startIpL);
                 ipProOpeInfo.setEndIp(endIpL);
-
-                ipProOpeInfo.setProvence("21");
+                //TODO ipProOpeInfo.setProvence("21");
+                ipProOpeInfo.setProvence("999");
                 ipProOpeInfo.setOperator("1");
                 ipProOpeInfoList.add(ipProOpeInfo);
             }
@@ -92,7 +92,7 @@ public class Ipv4ConvertOpePro {
     //读取csv文件中的二进制,转为对象
     public static List<IpCsvInfo> datasConvertIpInfo() {
         List<IpCsvInfo> infoList = new ArrayList<>();
-        dataList = importCsv(new File("C:\\Users\\juncai\\Desktop\\initipv4.csv"));
+        dataList = importCsv(new File("D:\\tmp\\shanghaimobile\\20200403-2\\ipv4-shanghai-mobile-999.csv"));
         for (String data : dataList) {
             if (!data.contains(":")) {
                 String[] dataArrs = data.split(",");
