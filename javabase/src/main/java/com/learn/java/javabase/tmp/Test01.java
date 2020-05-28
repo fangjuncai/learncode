@@ -3,6 +3,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.lang.reflect.Array;
 import java.math.BigInteger;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -10,9 +12,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public class Test01 {
+
     public static void main(String[] args)
     {
-        testArray01();
+        testCompare2();
+    }
+    public static void test02(){
+        //返回24小时之前至1970年的long 秒
+        LocalDateTime currTime = LocalDateTime.now();
+        Long aaaRefreshTimeInteval = currTime.minusMinutes(Long.parseLong("1440")).toEpochSecond(ZoneOffset.ofHours(8));
+        System.out.println(aaaRefreshTimeInteval);
     }
 
     public static void testArray01(){
@@ -63,7 +72,31 @@ public class Test01 {
         System.out.println(long1.compareTo(long2));
         System.out.println(long2.compareTo(long1));
     }
+    public static void testCompare2(){
+        List<Integer> arrayList = Arrays.asList(9,9, 8, 7, 2, 3, 4, 1, 0, 6, 5,9,9,9, 8, 7, 2, 3, 4, 1, 0, 6, 5,9);
+        Integer[] a = {9, 8, 7, 2, 3, 4, 1, 0, 6, 5};
+        Collections.sort(arrayList, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+/*
+                if(o1<o2){
+                    return -1;
+                }
+                else {
+                    return 1;
+                }
+*/
 
+                if(o1 >o2){
+                    return 1;
+                }
+                else {
+                    return -1;
+                }
+            }
+        });
+        arrayList.forEach(item -> System.out.println(item));
+    }
     public static void testCompare(){
         ArrayList<Integer> arrayList = new ArrayList<>();
         Integer[] a = {9, 8, 7, 2, 3, 4, 1, 0, 6, 5};
@@ -112,15 +145,4 @@ class MyComparator implements Comparator<Integer> {
         }
     }
 }
-/*
 
-                if(o1<o2){
-                    return -1;
-                }
-                else if(o1>o2){
-                    return 1;
-                }
-                else {
-                    return 0;
-                }
- */

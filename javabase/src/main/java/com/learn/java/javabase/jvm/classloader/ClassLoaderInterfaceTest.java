@@ -1,6 +1,7 @@
 package com.learn.java.javabase.jvm.classloader;
 
 import java.util.Random;
+//javap -c  jvm p12
 //ldc将int float String常量值从常年池推送至栈顶
 //bipush表示将单字节常量-128-127推送至栈顶
 //sipush表示将短整型-32768-32767常量推送至栈顶
