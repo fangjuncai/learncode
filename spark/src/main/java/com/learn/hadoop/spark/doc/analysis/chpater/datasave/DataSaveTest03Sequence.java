@@ -14,7 +14,7 @@ import java.util.Arrays;
 
 public class DataSaveTest03Sequence {
     public static void main(String[] args) {
-        SparkConf conf =new SparkConf().setMaster("local").setAppName("DataSaveTest03Sequence");
+        SparkConf conf =new SparkConf().setMaster("local").setAppName("DataSaveTest03Sequence").set("spark.hadoop.validateOutputSpecs", "false");
         JavaSparkContext sc = new JavaSparkContext(conf);
         //序列化键值对
         JavaPairRDD<String,Integer> rdd = sc.parallelizePairs(Arrays.asList(new Tuple2<String,Integer>("string one",1),

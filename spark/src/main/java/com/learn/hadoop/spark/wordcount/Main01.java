@@ -8,24 +8,26 @@ import org.apache.spark.api.java.JavaSparkContext;
 import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.PairFunction;
-import org.apache.spark.api.java.function.VoidFunction;
-import org.json4s.JsonUtil;
+import org.apache.spark.broadcast.Broadcast;
+import org.apache.spark.util.LongAccumulator;
 import scala.Tuple2;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 @Slf4j
 public class Main01 {
     public static void main(String[] args) {
-        //SparkConf sparkconf = new SparkConf().setAppName("main01").setMaster("local[*]");
-        SparkConf sparkconf = new SparkConf().setAppName("main01");
+/*        //SparkConf sparkconf = new SparkConf().setAppName("main01").setMaster("local[*]");//TODO local文件读写都在本地
+        //org.apache.hadoop.mapred.FileAlreadyExistsException: Output directory
+        SparkConf sparkconf = new SparkConf().setAppName("main01").set("spark.hadoop.validateOutputSpecs", "false");
         // System memory 186646528 must be at least 471859200. Please increase heap size using the --driver-memory option or spark.driver.memory in Spark configuration.
         // 471859200 (450.0MB)
         //val systemMemory = conf.getLong("spark.testing.memory", Runtime.getRuntime.maxMemory)。
         //https://www.cnblogs.com/AlanWilliamWalker/p/11680933.html
-        sparkconf.set("spark.testing.memory", "2147480000");//大于512M
-        JavaSparkContext jsc = new JavaSparkContext(sparkconf);
+        sparkconf.set("spark.testing.memory", "2147480000");//大于512M*/
+        JavaSparkContext jsc = SparkContextHolder.javaSparkContext;
 
         JavaRDD<String> input =jsc.parallelize(Arrays.asList("a j k l","a b c","d e f"," x y z "));
 
@@ -68,18 +70,41 @@ public class Main01 {
         //out.forEach(System.out::println);
         //TODO 采用的是spark下的conf log4j.properity  是可以打印的
         out.forEach(item -> log.info(item));
-/*        inputPair.join(inputPair2).foreach(new VoidFunction<Tuple2<String, Tuple2<Integer, Integer>>>() {
+        //读
+        JavaRDD<String> words  = jsc.textFile("/user/root/word.txt",3);
+        //设置广播变量
+        Broadcast<List<String>>  broadcast = jsc.broadcast(out);
+        //累加器
+        // Accumulator must be registered before send to executor  创建并注册累加器
+        LongAccumulator longAccumulator = jsc.sc().longAccumulator();
+
+
+        JavaRDD<String> words1 = words.mapPartitions(new FlatMapFunction<Iterator<String>, String>() {
+
             @Override
-            public void call(Tuple2<String, Tuple2<Integer, Integer>> stringTuple2Tuple2) throws Exception {
-                System.out.println(stringTuple2Tuple2.toString());
+            public Iterator<String> call(Iterator<String> stringIterator) throws Exception {
+                ArrayList<String>  list = new ArrayList<>();
+                while(stringIterator.hasNext()){
+                    String  item  = stringIterator.next();
+                    StringBuilder stringBuilder = new StringBuilder();
+                    //将广播变量的值添加到列表中
+                    stringBuilder.append(item).append("--").append(broadcast.getValue().toString());
+                    list.add(stringBuilder.toString());
+                    longAccumulator.add(1);
+
+                }
+                return list.iterator();
             }
         });
-        inputPair.foreach(new VoidFunction<Tuple2<String, Integer>>() {
-            @Override
-            public void call(Tuple2<String, Integer> stringIntegerTuple2) throws Exception {
-                System.out.println(stringIntegerTuple2.toString());
-            }
-        });*/
-        //out.forEach(System.out::println);
+        //写
+        words1.saveAsTextFile("/user/root/outword");
+
+        //collect打印
+        JavaRDD<String> hdfsResult  = jsc.textFile("/user/root/outword/part*");
+        hdfsResult.collect().forEach(item -> log.info(" hdfs result item {}",item));
+        log.info("item number : {}",longAccumulator.value());
+
+
+        jsc.stop();
     }
 }

@@ -13,10 +13,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 
-@SpringBootApplication(scanBasePackages = {"com.learn.java.javabase.spring.ioc"})
+@SpringBootApplication(scanBasePackages = {"com.learn.java.javabase"})
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-@EnableScheduling
-@Component
+
 public class JavabaseApplication {
 
     @Qualifier("PrintImpl01")
@@ -29,6 +28,7 @@ public class JavabaseApplication {
     }
     public static void main(String[] args) {
         SpringApplication.run(JavabaseApplication.class, args);
+        //JavabaseApplication javabaseApplication = new JavabaseApplication();//NullPointerException
         javabaseApplication.printInterface.print("name");
     }
 }

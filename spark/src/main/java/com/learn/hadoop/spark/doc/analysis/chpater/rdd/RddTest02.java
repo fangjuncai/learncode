@@ -3,6 +3,7 @@ package com.learn.hadoop.spark.doc.analysis.chpater.rdd;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapred.FileOutputFormat;
+import org.apache.hadoop.mapred.lib.MultipleTextOutputFormat;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.spark.SparkConf;
@@ -47,7 +48,8 @@ public class RddTest02 {
 
         //SparkConf sparkConf =new SparkConf().setMaster("local").setAppName("wordCount");
         //System.setProperty("hadoop.home.dir","D:\\work\\tools\\hadoop-3.0.0");
-        SparkConf sparkConf = new SparkConf().setMaster("local[*]").setAppName("RddTest02");
+        //SparkConf sparkConf = new SparkConf().setMaster("local[*]").setAppName("RddTest02");
+        SparkConf sparkConf = new SparkConf().setAppName("RddTest02").set("spark.hadoop.validateOutputSpecs", "false").setMaster("local[*]");
         JavaSparkContext sc = new JavaSparkContext(sparkConf);
         JavaRDD<String> rdd = sc.parallelize(Arrays.asList("hello spark world ", "hello java world", "hello python world"));
 
@@ -84,8 +86,9 @@ public class RddTest02 {
          */
         System.out.println("-----------------------------------------------");
         //输出搭配文件夹
-        flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\"
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+        /*flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\"
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd/HH/mm/ss")));*/
+        flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\");
 
         /**
          * 测试JavaPair 保存操作
@@ -97,11 +100,16 @@ public class RddTest02 {
             }
         });
 
-        flatMapPair.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\flatMapPair\\"
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
-        flatMapPair.saveAsHadoopFile("D:\\my\\code\\github\\learncode\\spark\\out\\hadoop", String.class, Integer.class, ConcreTextOutPutFormat.class);
+//        flatMapPair.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\flatMapPair\\"
+//                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-mm-dd")));
+        //TODO local文件读写都在本地
+        //flatMapPair.saveAsHadoopFile("D:\\my\\code\\github\\learncode\\spark\\out\\hadoop", String.class, Integer.class, ConcreTextOutPutFormat.class);
+        flatMapPair.saveAsHadoopFile("D:\\my\\code\\github\\learncode\\spark\\out\\hadoop", String.class, Integer.class, MyMultipleTextOutputFormat.class);
+
         //SequenceFile保存
         //flatMapPair.saveAsHadoopFile("D:\\my\\code\\github\\learncode\\spark\\out\\hadoop", Text.class, IntWritable.class, ConcreTextOutPutFormat.class);
 
     }
+
+
 }
