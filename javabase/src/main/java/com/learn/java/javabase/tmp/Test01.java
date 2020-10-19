@@ -5,6 +5,7 @@ import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -15,13 +16,18 @@ public class Test01 {
 
     public static void main(String[] args)
     {
-        testCompare2();
+       testDate1();
     }
     public static void test02(){
-        //返回24小时之前至1970年的long 秒
-        LocalDateTime currTime = LocalDateTime.now();
-        Long aaaRefreshTimeInteval = currTime.minusMinutes(Long.parseLong("1440")).toEpochSecond(ZoneOffset.ofHours(8));
-        System.out.println(aaaRefreshTimeInteval);
+
+    }
+    static void testDate1(){
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime minus1Hours = now.minusHours(1);
+        DateTimeFormatter generalformat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String taskDateTime = LocalDateTime.of(minus1Hours.getYear(), minus1Hours.getMonth(), minus1Hours.getDayOfMonth(),
+                minus1Hours.getHour(), 0, 0).format(generalformat);
+        System.out.println(taskDateTime);
     }
 
     public static void testArray01(){

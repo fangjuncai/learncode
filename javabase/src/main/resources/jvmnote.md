@@ -54,3 +54,13 @@ jdK1.2开始，加载类时双亲委派机制，比如加载Sample类的时候�
 从环境变量classpath或者系统属性指定的目录加载类，它是用户指定的类的加载器的父加载器
 
    
+## 工具
+### jstack
+```shell
+top -Hp 19478 
+asiainfo@ynyux-ps-dpifx-bd001-rh2288h:[/export/home/asiainfo/project/ai-c3-dpi-filler/logs]printf "%x\n" 19479
+4c17
+asiainfo@ynyux-ps-dpifx-bd001-rh2288h:[/export/home/asiainfo/project/ai-c3-dpi-filler/logs]jstack  19478|grep  4c17
+"DestroyJavaVM" #43 prio=5 os_prio=0 tid=0x00007f4924008800 nid=0x4c17 waiting on condition [0x0000000000000000]
+asiainfo@ynyux-ps-dpifx-bd001-rh2288h:[/export/home/asiainfo/project/ai-c3-dpi-filler/logs]
+```

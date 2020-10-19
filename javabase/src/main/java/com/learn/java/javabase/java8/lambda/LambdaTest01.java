@@ -82,6 +82,7 @@ public class LambdaTest01 {
                 System.out.println("anonymize fun");
             }
         }).start();
+        
 
         new Thread(() -> System.out.println("lambda fun")).start();
 
