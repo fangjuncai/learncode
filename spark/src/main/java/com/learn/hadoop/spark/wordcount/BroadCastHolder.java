@@ -1,5 +1,6 @@
 package com.learn.hadoop.spark.wordcount;
 
+import com.learn.hadoop.spark.config.AppConfig;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -24,7 +25,7 @@ public class BroadCastHolder implements Serializable {
 
     @Autowired
     public void setAppNameCast(JavaSparkContext jsc){
-        appNameCast = jsc.broadcast("app broadcast");
+        appNameCast = jsc.broadcast(AppConfig.appTestValue);
     }
 
 

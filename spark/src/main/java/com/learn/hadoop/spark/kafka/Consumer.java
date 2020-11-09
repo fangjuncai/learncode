@@ -17,14 +17,18 @@ public class Consumer {
         Logger.getLogger("org.apache.kafka").setLevel(Level.ERROR); //关掉idea控制台的日志
 
         Properties p = new Properties();
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.56.130:9092");
+        //119.45.207.171:9092
+        //p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.56.130:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "119.45.207.171:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "test1g1");
+        p.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG,true);
+        p.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG,"earliest");
 
         KafkaConsumer<String, String> kafkaConsumer = new KafkaConsumer<String, String>(p);
-        kafkaConsumer.subscribe(Collections.singletonList(Producer.topic));// 订阅消息
-
+        kafkaConsumer.subscribe(Collections.singletonList("test"));// 订阅消息
+        System.out.println("begin consumer");
         while (true) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {

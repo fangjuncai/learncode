@@ -59,6 +59,17 @@
             System.out.println("wordPairs partitioner :"+wordPairs.partitioner().toString());
 
             //归纳redues
+            wordPairs.aggregateByKey(0, new Function2<Integer, Integer, Integer>() {
+                @Override
+                public Integer call(Integer v1, Integer v2) throws Exception {
+                    return null;
+                }
+            }, new Function2<Integer, Integer, Integer>() {
+                @Override
+                public Integer call(Integer v1, Integer v2) throws Exception {
+                    return null;
+                }
+            });
             JavaPairRDD<String,Integer> wordredues = wordPairs.reduceByKey(new Function2<Integer, Integer, Integer>() {
                 @Override
                 public Integer call(Integer integer, Integer integer2) throws Exception {

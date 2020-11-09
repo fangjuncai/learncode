@@ -1,3 +1,4 @@
+/*
 package com.learn.hadoop.spark.doc.analysis.chpater.rdd;
 
 import org.apache.hadoop.io.IntWritable;
@@ -20,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Iterator;
 
+*/
 /**
  * map与flatmap的区别
  * map
@@ -40,7 +42,8 @@ import java.util.Iterator;
  * <p>
  * 测试collect方法
  * [[hello, spark, world], [hello, java, world], [hello, python, world]]
- */
+ *//*
+
 public class RddTest02 {
 
     public static void main(String[] args) {
@@ -81,18 +84,24 @@ public class RddTest02 {
         System.out.println("test collect");
         System.out.println(rddmap.collect());
 
-        /**
+        */
+/**
          * 测试保存
-         */
+         *//*
+
         System.out.println("-----------------------------------------------");
         //输出搭配文件夹
-        /*flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\"
-                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd/HH/mm/ss")));*/
+        */
+/*flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\"
+                + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd/HH/mm/ss")));*//*
+
         flatmap.saveAsTextFile("D:\\my\\code\\github\\learncode\\spark\\out\\wordflat\\");
 
-        /**
+        */
+/**
          * 测试JavaPair 保存操作
-         */
+         *//*
+
         JavaPairRDD<String, Integer> flatMapPair = flatmap.mapToPair(new PairFunction<String, String, Integer>() {
             @Override
             public Tuple2<String, Integer> call(String s) throws Exception {
@@ -113,3 +122,4 @@ public class RddTest02 {
 
 
 }
+*/

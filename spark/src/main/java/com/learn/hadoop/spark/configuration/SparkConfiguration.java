@@ -20,8 +20,8 @@ public class SparkConfiguration {
     }
     @Bean
     JavaSparkContext getJavaSparkContext(SparkConf sparkConf){
-        //sparkConf.setAppName("app name1").setMaster("local[*]");
-        sparkConf.setAppName("main01").set("spark.hadoop.validateOutputSpecs", "false");
+        sparkConf.setAppName("app name1").setMaster("local[*]");
+        //sparkConf.setAppName("main01").set("spark.hadoop.validateOutputSpecs", "false");
         return new JavaSparkContext(sparkConf);
     }
 }
