@@ -60,10 +60,13 @@ public final class IpConvert {
 
     /**
      * ipv6地址转有符号byte[17]
+     * byte是8字节
      */
     public static byte[] ipv6ToBytes(String ipv6) {
         byte[] ret = new byte[17];
+        //符号位
         ret[0] = 0;
+        //16段
         int ib = 16;
         boolean comFlag = false;// ipv4混合模式标记
         if (ipv6.startsWith(":"))// 去掉开头的冒号
@@ -81,13 +84,17 @@ public final class IpConvert {
             } else if ("".equals(groups[ig])) {
                 // 出现零长度压缩,计算缺少的组数
                 int zlg = 9 - (groups.length + (comFlag ? 1 : 0));
+                //空闲的段全部转为0
                 while (zlg-- > 0) {// 将这些组置0
                     ret[ib--] = 0;
                     ret[ib--] = 0;
                 }
             } else {
+                //转为int值
                 int temp = Integer.parseInt(groups[ig], 16);
+                //低八位
                 ret[ib--] = (byte) temp;
+                //高八位
                 ret[ib--] = (byte) (temp >> 8);
             }
         }
@@ -135,5 +142,8 @@ public final class IpConvert {
         {
             System.out.println(ss[i]);
         }
+
+        String  oneStr = new String("1111");
+        System.out.println(new BigInteger(oneStr,2));
     }
 }
