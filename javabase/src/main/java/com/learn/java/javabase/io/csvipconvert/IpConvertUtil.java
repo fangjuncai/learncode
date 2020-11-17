@@ -12,11 +12,11 @@ import java.util.Arrays;
  * @author
  *
  */
-public final class IpConvert {
+public final class IpConvertUtil {
     /**
      * 防止被实例化
      */
-    private IpConvert() {
+    private IpConvertUtil() {
     }
 
     /**

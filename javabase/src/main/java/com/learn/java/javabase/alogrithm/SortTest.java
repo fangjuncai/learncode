@@ -37,7 +37,7 @@ public class SortTest {
                     minIndex = m;
                 }
             }
-            //相同元素没有交换 所以是稳定的排序算法
+            //相同元素没有交换 所以是稳定的排序算法 只交换一次
             swap(i, minIndex, nums);
         }
         System.out.println("-----------------");

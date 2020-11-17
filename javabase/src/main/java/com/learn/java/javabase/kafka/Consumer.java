@@ -32,8 +32,8 @@ public class Consumer {
         while (true) {
             ConsumerRecords<String, String> records = kafkaConsumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {
-               // System.out.println(String.format("topic:%s,offset:%d,消息:%s", record.topic(), record.offset(), record.value()));
-                log.info(String.format("topic:%s,offset:%d,消息:%s", record.topic(), record.offset(), record.value()));
+               //System.out.println(String.format("topic:%s,offset:%d,消息:%s", record.topic(), record.offset(), record.value()));
+                log.info("topic:{},offset:{},消息:{},pattion {}", record.topic(), record.offset(), record.value(),record.partition());
 
             }
         }
