@@ -12,6 +12,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication(scanBasePackages = {"com.learn.java.javabase"})
 //@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
@@ -28,7 +32,6 @@ public class JavabaseApplication {
     }
     public static void main(String[] args) {
         SpringApplication.run(JavabaseApplication.class, args);
-        //JavabaseApplication javabaseApplication = new JavabaseApplication();//NullPointerException
-        javabaseApplication.printInterface.print("name");
+
     }
 }
