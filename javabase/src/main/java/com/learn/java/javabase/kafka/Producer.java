@@ -20,7 +20,7 @@ public class Producer {
     public static String topic = "test";//定义主题
 
     public static void main(String[] args) throws InterruptedException {
-
+        // kafka-topics.sh --create --zookeeper localhost:2181  --topic  testz --replication-factor  --partitions
         Properties producerPro = new Properties();
         //119.45.207.171:9092
         //producerPro.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.56.130:9092");//kafka地址，多个地址用逗号分割

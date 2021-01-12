@@ -19,7 +19,8 @@ public class Consumer {
         Properties p = new Properties();
         //119.45.207.171:9092
         //p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.56.130:9092");
-        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "119.45.207.171:9092");
+        //p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "119.45.207.171:9092");
+        p.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "10.21.16.243:9092");
         p.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         p.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
         p.put(ConsumerConfig.GROUP_ID_CONFIG, "test3");

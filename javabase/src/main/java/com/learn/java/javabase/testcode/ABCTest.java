@@ -18,6 +18,7 @@ B
 C
 不能用sleep函数，注意考虑线程安全问题。编程语言不限
 */
+    private static volatile int num = 1;
     private static Lock lock = new ReentrantLock();
     private static Condition A = lock.newCondition();
     private static Condition B = lock.newCondition();
@@ -25,34 +26,33 @@ C
 
 
     static class ThreadA extends Thread {
-        public void run(){
+        public void run() {
             lock.lock();
-/*            try {
-                System.out.println("A");
-                //A.await();
-
-                B.signal();
+            while (num != 1) {
+                try {
+                    A.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }*/
-
             System.out.println("A");
-                B.signal();
-
-
+            num = 2;
+            B.signal();
             lock.unlock();
         }
 
     }
+
     static class ThreadB extends Thread {
 
-        public void run(){
+        public void run() {
             lock.lock();
             try {
-
-                B.await();
+                while (num != 2) {
+                    B.await();
+                }
                 System.out.println("B");
+                num = 3;
                 C.signal();
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -62,21 +62,23 @@ C
         }
 
     }
+
     static class ThreadC extends Thread {
-        public void run(){
+        public void run() {
             lock.lock();
             try {
-
+                while (num != 3) {
+                    C.await();
+                }
                 A.signal();//唤起A
-
-                C.await();//等待
+                num = 1;
+                //C.await();//等待
                 System.out.println("C");
 
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
             lock.unlock();
 
         }
