@@ -6,7 +6,9 @@ package com.learn.java.javabase.examination;
  * @create: 2021-01-10 20:47
  **/
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 //链表
 class MyNode {
@@ -41,7 +43,7 @@ class Comparators {
     }
 }
 
-public class Main {
+public class LinkedNodeTest1 {
 
     //将无序单链表转化为有序单链表
     public static MyNode sortOfList(MyNode p) {
