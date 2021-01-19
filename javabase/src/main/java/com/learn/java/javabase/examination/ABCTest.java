@@ -1,4 +1,4 @@
-package com.learn.java.javabase.testcode;
+package com.learn.java.javabase.examination;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;

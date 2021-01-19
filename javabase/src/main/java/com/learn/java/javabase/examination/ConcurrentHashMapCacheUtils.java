@@ -1,4 +1,4 @@
-package com.learn.java.javabase.test;
+package com.learn.java.javabase.examination;
 
 /**
  * @description
