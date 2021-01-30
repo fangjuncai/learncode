@@ -12,17 +12,9 @@ import java.util.Arrays;
  * @create: 2020-05-16 16:43
  **/
 public class SortTest {
-    public static void main(String[] args) {
-        int[] nums = new int[]{10, 1, 2, 3, 4, 10, 9, 11, 100, 7, 99, 0, 20};
-        //ownSort(nums);
-        //bubbleSort(nums);
-        //insertSort(nums);
-        quickSork(nums, 0, nums.length - 1);
-        Arrays.stream(nums).forEach(item -> System.out.println(item));
-    }
 
     //算一种选择排序  每次都是最小放在首位；也可以实现最大值放到最后，内循环递减
-    public static void ownSort(int[] nums) {
+    public static void swapSort(int[] nums) {
         for (int i = 0; i < nums.length; i++) {
             int minIndex = i;
             for (int m = i + 1; m < nums.length; m++) {
@@ -66,7 +58,25 @@ public class SortTest {
             quickSork(nums, flag + 1, right);
         }
 
+    }
 
+    public static int partion2(int[] nums, int left, int right) {
+        int base = nums[left];
+        while (left < right) {
+            //left < right 否则一直循环下去,相同的元素也需要处理，如果都不处理相等，就会一直跳出，循环一直
+            while (left < right && nums[right] >= base) {
+                right--;
+            }
+            nums[left] = nums[right];
+            while (left < right && nums[left] <= base) {
+                left++;
+            }
+            nums[right] = nums[left];
+            //System.out.println(left+" left = "+nums[left]);
+            //System.out.println(right+" right = "+nums[right] );
+        }
+        nums[left] = base;
+        return left;
     }
 
     public static int partion(int[] nums, int left, int right) {
@@ -89,29 +99,86 @@ public class SortTest {
         return index - 1;
     }
 
-    public static int partion2(int[] nums, int left, int right) {
-        int base = nums[left];
-        while (left < right) {
-            //left < right 否则一直循环下去,相同的元素也需要处理，如果都不处理相等，就会一直跳出，循环一直
-            while (left < right && nums[right] >= base) {
-                right--;
-            }
-            nums[left] = nums[right];
-            while (left < right && nums[left] <= base) {
-                left++;
-            }
-            nums[right] = nums[left];
-            //System.out.println(left+" left = "+nums[left]);
-            //System.out.println(right+" right = "+nums[right] );
-        }
-        nums[left] = base;
-        return left;
-    }
+
     //归并排序
 
     //希尔排序
 
-    //插入排序  10 9 11 1
+
+    //直接交换没有用的
+    public static void swap(int m, int n) {
+        System.out.println("m=" + m + " n= " + n);
+        int tmp;
+        tmp = m;
+        m = n;
+        n = tmp;
+        System.out.println(" after m=" + m + " n= " + n);
+
+    }
+
+    //容器交换
+    public static void swap(int m, int n, int nums[]) {
+//        System.out.println("m="+m+" n= "+n);
+        int tmp;
+        tmp = nums[m];
+        nums[m] = nums[n];
+        nums[n] = tmp;
+//        System.out.println(" after m="+m+" n= "+n);
+
+    }
+
+    public static void mergeSort(int[] nums, int lowIndex, int highIndex) {
+
+        if (lowIndex < highIndex) {
+            int[] temp = new int[highIndex - lowIndex + 1];
+
+            int middle = (lowIndex + highIndex) / 2;
+            //左分
+            mergeSort(nums, lowIndex, middle);
+            //右分
+            mergeSort(nums, middle + 1, highIndex);
+            //merge
+            merge(nums, lowIndex, middle, highIndex, temp);
+        }
+
+    }
+
+    private static void merge(int[] nums, int lowIndex, int middleIndex, int highIndex, int[] temp) {
+        int leftBegin = lowIndex;
+        int rightBegin = middleIndex + 1;
+        int i = 0;
+        while (leftBegin <= middleIndex && rightBegin <= highIndex) {
+            if (nums[leftBegin] < nums[rightBegin]) {
+                temp[i] = nums[leftBegin];
+                leftBegin++;
+            } else {
+                temp[i] = nums[rightBegin];
+                rightBegin++;
+            }
+            i++;
+
+        }
+
+        while (leftBegin <= middleIndex) {
+            temp[i] = nums[leftBegin];
+            i++;
+            leftBegin++;
+
+        }
+        while (rightBegin <= highIndex) {
+            temp[i] = nums[rightBegin];
+            i++;
+            rightBegin++;
+        }
+        int m = 0;
+        for (int j = lowIndex; j <= highIndex && m <= i; j++) {
+            nums[j] = temp[m];
+            m++;
+        }
+
+    }
+
+    //插入排序  10 9 11 1  移动法
     public static void insertSort(int[] nums) {
         for (int i = 1; i < nums.length; i++) {
             int tmp = nums[i];
@@ -129,24 +196,73 @@ public class SortTest {
         }
     }
 
-    //直接交换没有用的
-    public static void swap(int m, int n) {
-        System.out.println("m=" + m + " n= " + n);
-        int tmp;
-        tmp = m;
-        m = n;
-        n = tmp;
-        System.out.println(" after m=" + m + " n= " + n);
-
+    //插入排序  10 9 11 1  移动法
+    public static void insertSort2(int[] nums) {
+        for (int i = 1; i < nums.length; i++) {
+            int tmp = nums[i];
+            int m = 0;
+/*            for (m = i - 1; m >= 0 && nums[m] > tmp; m--) {
+                nums[m + 1] = nums[m];
+            }*/
+            for (m = i - 1; m >= 0; m--) {
+                if (nums[m] > tmp) {
+                    nums[m + 1] = nums[m];
+                }
+            }
+            nums[m + 1] = tmp;
+        }
     }
 
-    public static void swap(int m, int n, int nums[]) {
-//        System.out.println("m="+m+" n= "+n);
-        int tmp;
-        tmp = nums[m];
-        nums[m] = nums[n];
-        nums[n] = tmp;
-//        System.out.println(" after m="+m+" n= "+n);
-
+    public static void shellSort2(int[] arr) {
+        //gap 长度的二分之一到1 循环1 组数=gap数 循环的次数
+        for (int gap = arr.length / 2; gap > 0; gap = gap / 2) {
+            for (int gapIndex = 0; gapIndex < gap; gapIndex++) {
+                //插入排序的逻辑
+                for (int i = gapIndex + gap; i < arr.length; i = i + gap) {
+                    int tmp = arr[i];
+                    int m;
+                    //从0开始
+                    for (m = i - gap; m >= 0 && arr[m] > tmp; m = m - gap) {
+                        arr[m + gap] = arr[m];
+                    }
+                    //tmp最后插入到m的后面
+                    arr[m + gap] = tmp;
+                }
+            }
+        }
     }
+
+    public static void shellSort(int[] arr) {
+        //gap 长度的二分之一到1 循环1 组数=gap数 循环的次数
+        for (int gap = arr.length / 2; gap > 0; gap = gap / 2) {
+            for (int gapIndex = 0; gapIndex < gap; gapIndex++) {
+                //插入排序的逻辑
+                for (int i = gapIndex + gap; i < arr.length; i = i + gap) {
+                    int tmp = arr[i];
+                    if (arr[i] < arr[i - gap]) {
+                        while ((i - gap) > 0 && tmp < arr[i - gap]) {
+                            //元素
+                            arr[i] = arr[i - gap];
+                            i = i - gap;
+                        }
+                    }
+                    arr[i] = tmp;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{10, 1, 2, 3, 4, 12, 9, 11, 100, 7, 99, 101, 21, 0};
+        //ownSort(nums);
+        //bubbleSort(nums);
+        //insertSort(nums);
+        //quickSork(nums, 0, nums.length - 1);
+        System.out.println("nums.length" + nums.length);
+        //mergeSort(nums, 0, nums.length - 1);
+        shellSort2(nums);
+        Arrays.stream(nums).forEach(item -> System.out.println(item));
+        System.out.println("nums.length" + nums.length);
+    }
+
 }

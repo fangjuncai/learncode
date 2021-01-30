@@ -1,4 +1,4 @@
-package com.learn.java.javabase.jvm.concurrent;
+package com.learn.java.javabase.concurrent;
 
 /**
  * @description

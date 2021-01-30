@@ -1,5 +1,6 @@
 package com.learn.java.javabase.leecode.test;
 
+import java.util.PriorityQueue;
 import java.util.Stack;
 
 /**
@@ -12,6 +13,7 @@ public class StackTest {
         test();
     }
     private static void test(){
+        PriorityQueue<Integer> priorityQueue = new PriorityQueue<>();
         Stack<String> stringStack = new Stack<>();
         stringStack.push("1");
         stringStack.push("2");

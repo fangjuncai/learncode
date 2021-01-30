@@ -7,10 +7,8 @@ package com.learn.java.javabase.leecode;
  * @create: 2020-08-15 23:31
  **/
 
-import java.awt.print.PrinterGraphics;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -28,7 +26,7 @@ import java.util.TreeMap;
  * 链接：https://leetcode-cn.com/problems/two-sum
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
-public class Lee0001TwoSum {
+public class SolutionTwoSum {
     public static void main(String[] args) {
         //int[] nums = new int[]{3,3};
         //int[] nums = new int[]{2,7,11,5};
