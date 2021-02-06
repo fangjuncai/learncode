@@ -40,14 +40,61 @@ package com.learn.java.javabase.leecode;
  * }
  */
 public class SolutionaddTwoNumbers {
-    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
-        int l1Len = 0;
-        int l2Len = 0;
-        return null;
+    public static void main(String[] args) {
+        ListNode nodes = new ListNode(1);
+        nodes.next = new ListNode(2);
+        ListNode nodes2 = new ListNode(1);
+        nodes2.next = new ListNode(2);
+        System.out.println(addTwoNumbers(nodes, nodes2));
     }
 
-    public class ListNode {
+    /**
+     * 链表相加+进位carry=sum
+     * 当前位数sum%/10
+     * 下一个进位sum/10
+     * @param l1
+     * @param l2
+     * @return
+     */
+
+    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode head = null;
+        ListNode current = null;
+        int carray = 0;
+        while (l1 != null || l2 != null) {
+
+            int sum = 0;
+            int int1 = 0;
+            int int2 = 0;
+            if (l1 != null) {
+                int1 = l1.val;
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                int2 = l2.val;
+                l2 = l2.next;
+            }
+            sum = int1 + int2 + carray;
+            if (head == null) {
+                head = current = new ListNode(sum % 10);
+            } else {
+                //下一个节点
+                current.next = new ListNode(sum % 10);
+                //维护列表顺序
+                current = current.next;
+            }
+            //下一个进位
+            carray = sum / 10;
+
+
+        }
+        if (carray > 0) {
+            current.next = new ListNode(carray);
+        }
+        return head;
+    }
+
+    public static class ListNode {
         int val;
         ListNode next;
 
@@ -60,6 +107,14 @@ public class SolutionaddTwoNumbers {
             val = 0;
             next = null;
 
+        }
+
+        @Override
+        public String toString() {
+            return "ListNode{" +
+                    "val=" + val +
+                    ", next=" + next +
+                    '}';
         }
     }
 }
