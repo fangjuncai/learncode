@@ -1,5 +1,6 @@
 package com.learn.java.javabase.leecode.test;
 
+import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Stack;
 
@@ -28,6 +29,7 @@ public class StackTest {
         //
         System.out.println(stringStack.push("4"));
         System.out.println(stringStack);
-
+        HashSet<Integer> hashSet =new HashSet<>();
+        hashSet.add(1);
     }
 }

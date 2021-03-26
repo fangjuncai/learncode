@@ -72,8 +72,6 @@ public class SortTest {
                 left++;
             }
             nums[right] = nums[left];
-            //System.out.println(left+" left = "+nums[left]);
-            //System.out.println(right+" right = "+nums[right] );
         }
         nums[left] = base;
         return left;
