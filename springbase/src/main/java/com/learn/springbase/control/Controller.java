@@ -3,6 +3,8 @@ package com.learn.springbase.control;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.learn.springbase.service.WebService;
 
@@ -27,4 +29,23 @@ public class Controller {
         log.info("ai-gongan-ne-performance postCheck");
         return  "postCheck";
     }
+    @GetMapping("/testAop1")
+    public String testAop1() {
+        log.info("testAop1");
+        return  "postCheck";
+    }
+    @RequestMapping(value = "/testAop3",method = RequestMethod.GET)
+    public String testAop3() {
+        log.info("testAop3");
+        return  "postCheck";
+    }
+    /*
+    {
+    "timestamp": "2021-04-06T12:38:00.748+00:00",
+    "status": 405,
+    "error": "Method Not Allowed",
+    "message": "",
+    "path": "/private/testAop3"
+}
+     */
 }

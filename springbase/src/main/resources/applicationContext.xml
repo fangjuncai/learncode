@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+profile="">
 
     <!--
     id - 自定义给类取一个名字(默认规定) 确保唯一性
     class - 对应类名 不能是抽象类或者接口
     定义bean时 要保证有一个无参数的构造方法
 -->
-<!--    <bean id="user" class="com.learn.springbase.pojo.User">
+<!--    <bean id="user" class="com.lezarn.springbase.pojo.User">
         <property name="username" value="admin" ></property>
         <property name="password" value="admin123" ></property>
     </bean>-->
-<!--    <bean id="user" name="User" class="com.learn.springbase.pojo.User">
-        <property name="username" value="admin" ></property>
-        <property name="password" value="admin123" ></property>
-    </bean>-->
-    <bean class="com.learn.springbase.pojo.User">
+    <bean id="user" name="User" class="com.learn.springbase.pojo.User">
         <property name="username" value="admin" ></property>
         <property name="password" value="admin123" ></property>
     </bean>
+<!--    <bean id="user" class="com.learn.springbase.pojo.User" >
+        <property name="username" value="admin" ></property>
+        <property name="password" value="admin123" ></property>
+    </bean>-->
+
 </beans>

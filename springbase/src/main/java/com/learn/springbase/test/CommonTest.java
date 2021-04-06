@@ -2,8 +2,10 @@ package com.learn.springbase.test;
 
 import com.learn.springbase.pojo.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.io.ClassPathResource;
 
 /**
  * @description
@@ -12,6 +14,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  **/
 @Slf4j
 public class CommonTest {
+    public static void main(String[] args) {
+        XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
+        User user = (User) xmlBeanFactory.getBean("User");
+        log.info("user = {}",user);
+
+    }
     public static void testGetBean(){
         // 1.初始化ioc容器(装对象的容器)
         ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
