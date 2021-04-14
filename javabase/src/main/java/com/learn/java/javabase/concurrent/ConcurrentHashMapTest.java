@@ -23,6 +23,7 @@ public class ConcurrentHashMapTest {
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put(null, "v1");
         hashMap.put("k1", "v1");
+        hashMap.get("t1");
         System.out.println(hashMap.size());
         System.out.println(hashMap.toString());
 

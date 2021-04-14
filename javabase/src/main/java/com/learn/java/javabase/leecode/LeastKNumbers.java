@@ -123,8 +123,10 @@ public class LeastKNumbers {
             while (leftIndex < rightIndex && nums[leftIndex] <= flag) {
                 leftIndex++;
             }
+            //并不一定是一个left
             nums[rightIndex] = nums[leftIndex];
         }
+        //哨兵最终位置
         nums[leftIndex] = flag;
         return leftIndex;
 
