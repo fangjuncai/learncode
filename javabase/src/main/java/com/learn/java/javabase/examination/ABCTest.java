@@ -23,11 +23,13 @@ C
     private static Condition A = lock.newCondition();
     private static Condition B = lock.newCondition();
     private static Condition C = lock.newCondition();
+    private static ReentrantLock lock2 = new ReentrantLock();
 
-
+    private static Condition D= lock2.newCondition();
     static class ThreadA extends Thread {
         public void run() {
             lock.lock();
+            lock2.lock();
             while (num != 1) {
                 try {
                     A.await();

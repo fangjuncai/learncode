@@ -138,9 +138,7 @@ public class SortTest {
             //merge
             merge(nums, lowIndex, middle, highIndex, temp);
         }
-
     }
-
     private static void merge(int[] nums, int lowIndex, int middleIndex, int highIndex, int[] temp) {
         int leftBegin = lowIndex;
         int rightBegin = middleIndex + 1;
