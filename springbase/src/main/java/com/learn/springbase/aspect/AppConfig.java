@@ -1,4 +1,4 @@
-package com.learn.springbase.config;
+package com.learn.springbase.aspect;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * @create: 2021-04-06 17:08
  **/
 @Configuration
-@EnableAspectJAutoProxy
+//TODO
+//@EnableAspectJAutoProxy
 public class AppConfig {
 }

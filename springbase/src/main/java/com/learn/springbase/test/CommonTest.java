@@ -15,6 +15,11 @@ import org.springframework.core.io.ClassPathResource;
 @Slf4j
 public class CommonTest {
     public static void main(String[] args) {
+     //testGetBean();
+        testXml();
+    }
+
+    public static void  testXml() {
         XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
         User user = (User) xmlBeanFactory.getBean("User");
         log.info("user = {}",user);
@@ -28,7 +33,8 @@ public class CommonTest {
         //User user = (User) context.getBean("User");
         //如果没有指定id name
         //User user = (User) context.getBean("com.learn.springbase.pojo.User");
-        User user = (User) context.getBean(User.class);
+        //User user = (User) context.getBean(User.class);
+        User user= (User) context.getBean("user");
         log.info(user.toString());
     }
 }
