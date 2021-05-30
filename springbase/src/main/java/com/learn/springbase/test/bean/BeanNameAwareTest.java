@@ -1,5 +1,6 @@
 package com.learn.springbase.test.bean;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -13,6 +14,7 @@ import javax.annotation.PostConstruct;
  * @create: 2021-04-19 19:07
  **/
 @Component(value = "beanNameAwareTest1")
+@Slf4j
 public class BeanNameAwareTest implements BeanNameAware, InitializingBean, DisposableBean {
     private String name;
     @PostConstruct
@@ -22,17 +24,17 @@ public class BeanNameAwareTest implements BeanNameAware, InitializingBean, Dispo
     @Override
     public void setBeanName(String name) {
         this.name = name;
-        System.out.println(this.name);
+        log.info(this.name);
 
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("afterPropertiesSet " + this.name);
+        log.info("afterPropertiesSet " + this.name);
     }
 
     @Override
     public void destroy() throws Exception {
-        System.out.println("desotry " + name);
+        log.info("desotry " + name);
     }
 }
