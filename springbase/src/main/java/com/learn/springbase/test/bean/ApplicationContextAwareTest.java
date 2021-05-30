@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * SpringBoot 在注入文件失败时，可能实例化类缺少@Componen
  **/
 
-@Component
+//@Component
 public class ApplicationContextAwareTest implements ApplicationContextAware {
     private static ApplicationContext localContext;
 

@@ -2,6 +2,7 @@ package com.learn.springbase.test;
 
 import com.learn.springbase.pojo.User;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -20,7 +21,9 @@ public class CommonTest {
     }
 
     public static void  testXml() {
-        XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
+        BeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
+
+        //XmlBeanFactory xmlBeanFactory = new XmlBeanFactory(new ClassPathResource("applicationContext.xml"));
         User user = (User) xmlBeanFactory.getBean("User");
         log.info("user = {}",user);
 

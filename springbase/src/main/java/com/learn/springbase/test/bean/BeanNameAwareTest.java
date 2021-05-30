@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
  * @author: fangjc
  * @create: 2021-04-19 19:07
  **/
-@Component(value = "beanNameAwareTest1")
+//@Component(value = "beanNameAwareTest1")
 @Slf4j
 public class BeanNameAwareTest implements BeanNameAware, InitializingBean, DisposableBean {
     private String name;
