@@ -12,7 +12,7 @@ import java.security.PublicKey;
  * @author: fangjc
  * @create: 2021-04-19 23:27
  **/
-//@Component
+@Component
 @Slf4j
 public class BeanPostProcessorTest implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {

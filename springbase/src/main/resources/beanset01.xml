@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+profile="">
+
+    <!--
+    id - 自定义给类取一个名字(默认规定) 确保唯一性
+    class - 对应类名 不能是抽象类或者接口
+    定义bean时 要保证有一个无参数的构造方法
+-->
+
+    <bean id="payRecord"  class="com.learn.springbase.pojo.PayRecord">
+        <property name="recordId" value="1"></property>
+        <property name="custom" ref="custom"></property>
+        <property name="remarks">
+            <list>
+                <value>"remark01"</value>
+                <value>"remark02"</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="custom" class="com.learn.springbase.pojo.Custom">
+        <property name="customId" value="1"></property>
+        <property name="customName" value="default"></property>
+    </bean>
+
+</beans>
