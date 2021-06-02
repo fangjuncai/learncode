@@ -21,6 +21,33 @@ profile="">
         </property>
     </bean>
 
+    <bean id="payReocordByConstruct"  class="com.learn.springbase.pojo.PayReocordByConstruct">
+        <constructor-arg value="100" index="0"></constructor-arg>
+        <constructor-arg value="desc" index="1"></constructor-arg>
+
+<!--        <constructor-arg ref="custom" index="2"></constructor-arg>-->
+        <constructor-arg ref="custom"></constructor-arg>
+
+    </bean>
+<!--
+    <bean id="payReocordAuto"  class="com.learn.springbase.pojo.PayReocordByAuto" autowire="byName">
+        <property name="recordId" value="1"></property>
+        <property name="desc" value="desc"></property>
+    </bean>-->
+<!--
+    <bean id="payReocordAuto"  class="com.learn.springbase.pojo.PayReocordByAuto" autowire="byName">
+        <constructor-arg value="id1" index="0"></constructor-arg>
+        <constructor-arg value="desc" index="1"></constructor-arg>
+    </bean>
+-->
+    <bean id="payReocordAuto"  class="com.learn.springbase.pojo.PayReocordByAuto" autowire="byType">
+        <constructor-arg value="id1" index="0"></constructor-arg>
+        <constructor-arg value="desc" index="1"></constructor-arg>
+    </bean>
+
+
+
+
     <bean id="custom" class="com.learn.springbase.pojo.Custom">
         <property name="customId" value="1"></property>
         <property name="customName" value="default"></property>

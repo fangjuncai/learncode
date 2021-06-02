@@ -1,5 +1,6 @@
 package com.learn.springbase;
 
+import com.learn.springbase.pojo.PayReocordByAuto;
 import com.learn.springbase.pojo.User;
 import com.learn.springbase.test.CommonTest;
 import com.learn.springbase.test.bean.ApplicationContextAwareTest;
@@ -29,6 +30,9 @@ public class SpringbaseApplication {
 
         }
         context.getBean(Main.class).test();
+
+        PayReocordByAuto payRecord = (PayReocordByAuto) context.getBean("payReocordAuto");
+        log.info("payRecord {}",payRecord);
         //context.close();
 
     }
